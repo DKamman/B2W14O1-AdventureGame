@@ -1,0 +1,4 @@
+RPG game:
+
+Elk level heeft een aantal vijanden, de vijanden van elk level
+kunnen alleen verslagen worden met een bepaald wapen die je kan vinden binnen in het level

@@ -1,0 +1,52 @@
+body{
+	text-align: center;
+	font-family: 'Unlock', cursive;
+	color: white;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+h1{
+	font-size: 50px;
+}
+
+#description{
+	width: 800px;
+	margin: 0 auto;
+	font-size: 20px;
+}
+
+#game-buttons{
+	margin-top: 50px;
+}
+
+#inventoryItem{
+	position: fixed;
+	top: 450px;
+	left: 50px;
+	border-style: solid;
+	border-color: red;
+	border-width: 3px;
+}
+
+#inventoryItem2{
+	position: fixed;
+	top: 450px;
+	left: 110px;
+	border-style: solid;
+	border-color: red;
+	border-width: 3px;
+}
+
+#inventoryItem3{
+	position: fixed;
+	top: 450px;
+	left: 160px;
+	border-style: solid;
+	border-color: red;
+	border-width: 3px;
+}
+
+img{
+	width: 50px;
+	height: 50px;
+}
