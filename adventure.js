@@ -8,8 +8,6 @@ var knop2 			= document.getElementById("button2");
 var knop3 			= document.getElementById("button3");
 
 var ItemsInventory = [];
-ItemsInventory ["fakkel"] = false;
-ItemsInventory ["mes"] = false;
 
 //Toevoegen van een externe CSS voor een google font.
 var link = document.createElement("LINK");
@@ -48,10 +46,9 @@ function start(){
 function level1(){
 
 	function B11(){
-		ItemsInventory [0] = "fakkel"
 		inventory.style.display = "";
 		inventory.setAttribute("src","img/fakkel.png");
-		ItemsInventory ["fakkel"] = true;
+		ItemsInventory.push("fakkel");
 		}
 	function B13(){
 		window.alert("Je hebt een geheime doorgang gevonden die je diep de tempel in leidt.\n(ga door naar level 5)");
@@ -68,9 +65,9 @@ function level1(){
 	knop2.innerHTML = "Loop rechtdoor";
 	knop3.innerHTML = "Lees de steen met de tekst: 'Uw voorgangers zijn gestorven'";
 
-	knop1.addEventListener("click", B11, {once: true});
-	knop2.addEventListener("click", level2, {once: true});
-	knop3.addEventListener("click", B13, {once: true});
+	knop1.onclick = B11;
+	knop2.onclick = level2;
+	knop3.onclick = B13;
 
 }
 
@@ -79,7 +76,6 @@ function level1(){
 function level2(){
 
 	function B22(){
-		ItemsInventory [1] = "mes"
 		var img1 = document.createElement("IMG");
 		game.appendChild(img1);
 		var att 	= document.createAttribute("src");
@@ -91,7 +87,7 @@ function level2(){
 		img1.setAttributeNode(att);
 		img1.setAttributeNode(att2);
 		img1.setAttributeNode(att3);
-		ItemsInventory ["mes"] = true;
+		ItemsInventory.push("mes");
 		}
 	function B23(){
 		window.alert("In het hand van het skelet vind je een sleutel die past op het slot. Je loopt door naar de volgende kamer.");
@@ -107,9 +103,9 @@ function level2(){
 	knop2.innerHTML = "Pak het mes van het platform";
 	knop3.innerHTML = "Inspecteer het skelet";
 
-	knop1.addEventListener("click", level3, {once: true});
-	knop2.addEventListener("click", B22, {once: true});
-	knop3.addEventListener("click", B23, {once: true});
+	knop1.onclick = level3;
+	knop2.onclick = B22;
+	knop3.onclick = B23;
 
 }
 
@@ -135,9 +131,9 @@ function level3(){
 	knop2.innerHTML = "Gebruik het mes op jezelf";
 	knop3.innerHTML = "Wacht tot je sterft van de honger";
 
-	knop1.addEventListener("click", B31, {once: true});
-	knop2.addEventListener("click", B32, {once: true});
-	knop3.addEventListener("click", B33, {once: true});	
+	knop1.onclick = B31;
+	knop2.onclick = B32;
+	knop3.onclick = B33;	
 }
 
 
@@ -147,8 +143,15 @@ function level4(){
 	knop2.disabled = true;
 
 	function B41() {
-		if  (ItemsInventory ["fakkel"] = true) {
+		/*if  (ItemsInventory ["fakkel"] = true) {
 			knop2.disabled = false;	
+		}
+		else{
+			alert("Je loopt eindeloos rond in de duistere kamer")
+			deathReload();
+		}*/
+		if (ItemsInventory.includes("fakkel")) {
+			knop2.disabled = false;
 		}
 		else{
 			alert("Je loopt eindeloos rond in de duistere kamer")
@@ -162,12 +165,14 @@ function level4(){
 	knop2.innerHTML = "Ga door de poort";
 	knop3.innerHTML = "";	
 
-	knop1.addEventListener("click", B41, {once: true});
-	knop2.addEventListener("click", level5, {once: true});
+	knop1.onclick = B41;
+	knop2.onclick = level5;
 }
 
 
 function level5(){
+
+	knop3.style.display = "";
 
 	function B51(){
 		alert("De mummy grijpt je!");
@@ -175,7 +180,7 @@ function level5(){
 	}
 
 	function B52(){
-		if (ItemsInventory ["mes"] = true) {
+		if (ItemsInventory.includes("mes")) {
 			alert("De mummy valt uit 1 en je loopt door de deur naar de volgende kamer.")
 			level6();
 		}
@@ -192,9 +197,9 @@ function level5(){
 	knop2.innerHTML = "Steek de mummy met je mes";
 	knop3.innerHTML = "Knuffel de mummy";
 
-	knop1.addEventListener("click", B51, {once: true});
-	knop2.addEventListener("click", B52, {once: true});
-	knop3.addEventListener("click", B51, {once: true});	
+	knop1.onclick = B51;
+	knop2.onclick = B52;
+	knop3.onclick = B51;	
 }
 
 
@@ -214,39 +219,85 @@ function level6(){
 	knop2.innerHTML = "Loop door de ingang recht voor je";
 	knop3.innerHTML = "Loop door de rechter doorgang";
 
-	knop1.addEventListener("click", B61, {once: true});
-	knop2.addEventListener("click", level10, {once: true});
-	knop3.addEventListener("click", B63, {once: true});	
+	knop1.onclick = B61;
+	knop2.onclick = level7;
+	knop3.onclick = B63;	
 }
 
 
 function level7(){
+	function B71(){
+		alert("1 van de planken breekt en je valt tot je dood.")
+		deathReload();
+	}
+	function B73(){
+		alert("Terwijl je met volle snelheid over de brug rent zie je de planken achter je de afgrond in vallen. Je redt het naar de overkant.")
+		level8();
+	}
 	document.body.style.backgroundImage = "url('img/7.jpg')";
-	titel.innerHTML = "Level 7";
-	beschrijving.innerHTML = ""
-	knop1.innerHTML = "";
-	knop2.innerHTML = "";
-	knop3.innerHTML = "";	
+	titel.innerHTML = "Level 7 - De brug naar de volgende kamer";
+	beschrijving.innerHTML = "Deze touw brug lijkt heel gammel. Kies goed hoe je erover heen gaat"
+	knop1.innerHTML = "Kruipend";
+	knop2.innerHTML = "Lopend";
+	knop3.innerHTML = "Rennend";
+
+	knop1.onclick = B71;
+	knop2.onclick = B71;
+	knop3.onclick = B73;	
 }
 
 
 function level8(){
+	function B81(){
+		alert("Je vindt een omweg achter een paar losse stenen.")
+		level9();
+	}
+	function B82(){
+		alert("Je bent de grootste idioot op de planeet. De spikes gaan door je heen als een warm mes door boter.");
+		deathReload();
+	}
+	function B83(){
+		alert("Je springt niet ver genoeg en je voet blijft hangen aan een spike. Je klapt op de stenen vloer.")
+		deathReload();
+	}
+
 	document.body.style.backgroundImage = "url('img/8.jpg')";
-	titel.innerHTML = "Level 8 - ";
-	beschrijving.innerHTML = "In dit spel ga je op onderzoek binnen in een oude Tempel. Maak de goede keuzes om een schat te vinden en het spel te winnen. Kijk uit voor de gevaren die op de loer liggen!"
-	knop1.innerHTML = "Start!";
-	knop2.innerHTML = "";
-	knop3.innerHTML = "";	
+	titel.innerHTML = "Level 8 - Bloederige spikes";
+	beschrijving.innerHTML = "Je loopt een kamer binnen met een al geactiveerde booby trap. Je ziet bloederige spikes in de vloer."
+	knop1.innerHTML = "Zoek een omweg";
+	knop2.innerHTML = "Doorheen kruipen";
+	knop3.innerHTML = "Eroverheen springen";
+
+	knop1.onclick = B81;
+	knop2.onclick = B82;
+	knop3.onclick = B83;
 }
 
 
 function level9(){
+	function B91(){
+		alert("Je wordt geplet.");
+		deathReload();
+	}
+	function B92(){
+		alert("Onder je opent een valluik. Je valt een bekende kamer in.");
+		level1();
+	}
+	function B93(){
+		alert("je gaat op de grond liggen en de steen vliegt over je heen.\n Aan het uiteinde van de gang zie je de doorgang naar de volgende kamer.");
+		level10();
+	}
+
 	document.body.style.backgroundImage = "url('img/9.jpg')";
-	titel.innerHTML = "Level 9";
+	titel.innerHTML = "Level 9 - De rollende dood";
 	beschrijving.innerHTML = ""
-	knop1.innerHTML = "";
-	knop2.innerHTML = "";
-	knop3.innerHTML = "";	
+	knop1.innerHTML = "Probeer de steen te stoppen";
+	knop2.innerHTML = "Druk op de knop";
+	knop3.innerHTML = "Ga op de grond liggen";
+
+	knop1.onclick = B91;
+	knop2.onclick = B92;
+	knop3.onclick = B93;
 }
 
 
@@ -270,9 +321,9 @@ function level10(){
 	knop2.innerHTML = "Pak de edelsteen. Dit is het einde. Dit is geen truc. Pak de edelsteen en je bent rijk!";
 	knop3.innerHTML = "Steek jezelf neer voor 1 of andere reden";
 
-	knop1.addEventListener("click", B101, {once: true});
-	knop2.addEventListener("click", B102, {once: true});
-	knop3.addEventListener("click", B103, {once: true});	
+	knop1.onclick = B101;
+	knop2.onclick = B102;
+	knop3.onclick = B103;
 }
 
 start();
